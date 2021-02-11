@@ -1,6 +1,7 @@
 """
 This is merely a quick and dirty example. It doesn't provide any support for
 customisation, extending functionality, or more extensive data collection.
+test
 """
 
 from typing import List, Tuple
