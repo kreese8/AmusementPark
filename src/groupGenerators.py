@@ -1,2 +1,4 @@
  #Hello
+def spam():
+    pass
 
