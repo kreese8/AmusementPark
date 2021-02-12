@@ -4,10 +4,10 @@ customisation, extending functionality, or more extensive data collection.
 test2
 """
 
-from typing import List, Tuple
-import random
+from typing import List
+import groupGenerators as gen
 
-def load_boat(line: List[int], solo_groups: int) -> Tuple[List[int], int]:
+def load_boat(line: List[int]) -> List[int]:
     """
     Tries to load a single boat with the groups in the line and the solo_groups.
     Returns the new line, and the new amount of groups.
@@ -15,27 +15,21 @@ def load_boat(line: List[int], solo_groups: int) -> Tuple[List[int], int]:
     remaining = 8
     while len(line) > 0 and remaining >= line[0]:
         remaining -= line.pop(0)
-    return line, 0
+    return line
 
-def generate_groups(time: int) -> List[int]:
-    """
-    Generates the groups to be added to the line.
-    """
-    return [random.randint(1,7) for _ in range(random.randint(1,2))]
 
-def step_time(line, solo_groups, time) -> Tuple[List[int], int]:
+def step_time(line: List[int], time: int) -> List[int]:
     """
     Generates new groups and loads a single boat.
     """
-    line.extend(generate_groups(time))
-    line, solo_groups = load_boat(line, solo_groups)
-    return line, solo_groups
+    line.extend(gen.generate_groups(time))
+    line = load_boat(line)
+    return line
 
 def perf_timesteps(n: int)->None:
     line = []
-    solo_groups = 0
     for time in range(n):
-        line, solo_groups = step_time(line, solo_groups, time)
+        line = step_time(line, time)
         print(line)
 
 if __name__ == "__main__":
