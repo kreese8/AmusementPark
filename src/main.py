@@ -1,11 +1,11 @@
 """
 This is merely a quick and dirty example. It doesn't provide any support for
 customisation, extending functionality, or more extensive data collection.
-test2
 """
 
 from typing import List
 import groupGenerators as gen
+import random
 
 def load_boat(line: List[int]) -> List[int]:
     """
@@ -17,6 +17,11 @@ def load_boat(line: List[int]) -> List[int]:
         remaining -= line.pop(0)
     return line
 
+def generate_groups(time: int) -> List[int]:
+    """
+    Generates the groups to be added to the line.
+    """
+    return [random.randint(1,7) for _ in range(random.randint(1,2))]
 
 def step_time(line: List[int], time: int) -> List[int]:
     """
@@ -27,6 +32,9 @@ def step_time(line: List[int], time: int) -> List[int]:
     return line
 
 def perf_timesteps(n: int)->None:
+    """
+
+    """
     line = []
     for time in range(n):
         line = step_time(line, time)
