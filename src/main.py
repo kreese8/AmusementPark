@@ -72,6 +72,7 @@ def perf_timesteps(n: int) -> (pd.DataFrame, pd.DataFrame):
         #print(line)
     
     # TODO: Extract the plotting to a separate file
+    # Make some pretty plots
     fig, ax = plt.subplots(nrows=2)
     df_timesteps['line length'].plot(ax=ax[0]) 
     sns.violinplot(data=df_groups, x='size', y='wait time', ax=ax[1])
