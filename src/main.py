@@ -35,7 +35,7 @@ def generate_groups_fancy(time: int, dist: List[int], line_length: int, busyness
     This one is more fancy because it takes the distribution and busyness into consideration.
     line_length is the current line length, and the line_target is the length,
     before visitors start to get discouraged by line_length.
-    dist is a list of weights, for each group size.
+    dist is a list of weights, for each group size. For example: [7,6,5,4,3,2,1]
     """
     
     if line_length < line_target:
@@ -65,16 +65,18 @@ def step_time(line: List[Tuple[int, int]], time: int) -> (List[int], List[int]):
     
     # This is sufficient for first come first serve
     # Load the boat and keep track of departed groups
-    # remaining = const.BOAT_CAPACITY
-    # departed = []
-    # while len(line) > 0 and remaining >= line[0][0]:        
-    #    departed.append(line.pop(0))
-    #    remaining -= departed[-1][0]
-    # return line, departed
+
+    remaining = const.BOAT_CAPACITY
+    departed = []
+    while len(line) > 0 and remaining >= line[0][0]:        
+       departed.append(line.pop(0))
+       remaining -= departed[-1][0]
+    return line, departed
     
     remaining = const.BOAT_CAPACITY
     departed = []
     while len(line) > 0:
+        line[0:const.MAX_LINE_SKIP]
         options = [index for index, option in enumerate(line[0:const.MAX_LINE_SKIP]) if option[0] <= remaining]
         if len(options) > 0:
             departed.append(line.pop(options[0]))
@@ -127,5 +129,7 @@ def perf_timesteps(n: int) -> (pd.DataFrame, pd.DataFrame):
 
 if __name__ == "__main__":
     #print(generate_groups_fancy(28, [1,1,1,1,1,1,1], 5, 1, 8))
-    #df_timesteps, df_groups = perf_timesteps(2000)
-    print(step_time([(2, 28), (1, 28), (6, 28), (2, 28), (1, 28), (6, 28), (2, 28), (1, 28), (6, 28)], 0))
+    df_timesteps, df_groups = perf_timesteps(2000)
+    # print(step_time([(2, 28), (1, 28), (6, 28), (6, 28), (6, 28), (6, 28), (2, 28), (1, 28), (6, 28)], 28))
+
+# %%

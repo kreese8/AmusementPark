@@ -4,7 +4,7 @@ BOAT_LOAD_TIME = 0.25
 DAY_LENGTH = 12*60
 BOAT_CAPACITY = 8
 MAX_GROUP_SIZE = 7
-MAX_LINE_SKIP = 3
+MAX_LINE_SKIP = 4 # 1 is the minimum
 COLS_TIMESTEPS = ['time', 'line length', 'boat occupancy']
 COLS_GROUPS = ['size', 'arrival time', 'departure time', 'wait time']
 
